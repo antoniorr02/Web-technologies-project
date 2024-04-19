@@ -47,21 +47,36 @@
         }
 
         section {
-            background-image: url("img/fondo2.png");
+            background-image: url("img/fondo_azul_suave.png");
             background-size: cover;
             background-repeat:no-repeat;
             background-attachment: scroll;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin: 20px auto;
+            margin: 30px auto;
             max-width: 600px;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, scale 0.3s ease;
             color: black;
         }
 
         section:hover {
             opacity: 0.7;
+            scale:calc(1.1);
+        }
+
+        section:hover #informacion_deluxe {
+            font-size: 16px;
+            opacity: 1;
+            transition: font-size 0.3s ease, opacity 0.3s ease; /* Transiciones suaves */
+            margin-top: 10px;
+        }
+
+        #informacion_deluxe {
+            font-size: 0px;
+            opacity: 0;
+            transition: font-size 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease; /* Transiciones suaves */
+            text-align: left;
         }
 
         h2 {
@@ -137,7 +152,7 @@
 <body>
     <div class="contenedor">
         <header>
-            <img id="logo-largo" src="./img/logos/logo-largo.png" alt="Logo Hotel Palace">
+            <a href="presentacion.html"><img id="logo-largo" src="./img/logos/logo-largo.png" alt="Logo Hotel Palace"></a>
         </header>
         <main>
             <h1>Habitaciones del Hotel Palace</h1>
@@ -146,6 +161,12 @@
                     <h2>Habitación Deluxe</h2>
                     <p>Una habitación elegante y espaciosa con todas las comodidades necesarias para una estancia lujosa.</p>
                     <img src="img/habitaciones/habitacion-estandar.jpg" alt="Habitación Deluxe">
+                    <ul id="informacion_deluxe">
+                        <li><strong>1 persona:</strong> 120€</li>
+                        <li><strong>2 personas:</strong> 150€</li>
+                        <li><strong>3 personas:</strong> 180€</li>
+                        <li><strong>4 personas:</strong> 220€</li>
+                    </ul>
                 </section>
             </a>
             <a href="reservar.html">
@@ -153,6 +174,12 @@
                     <h2>Suite Junior</h2>
                     <p>Una suite amplia y confortable con área de estar y vistas panorámicas de la ciudad de Granada.</p>
                     <img src="img/habitaciones/suite_junior.jpg" alt="Suite Junior">
+                    <ul id="informacion_deluxe">
+                        <li><strong>1 persona:</strong> 100€</li>
+                        <li><strong>2 personas:</strong> 120€</li>
+                        <li><strong>3 personas:</strong> 150€</li>
+                        <li><strong>4 personas:</strong> 180€</li>
+                    </ul>
                 </section>
             </a>
             <a href="reservar.html">
@@ -160,6 +187,12 @@
                     <h2>Habitación Familiar</h2>
                     <p>Perfecta para familias, esta habitación ofrece espacio adicional y comodidades para todos los miembros de la familia.</p>
                     <img src="img/habitaciones/familiar.jpg" alt="Habitación Familiar">
+                    <ul id="informacion_deluxe">
+                        <li><strong>1 persona:</strong> 80€</li>
+                        <li><strong>2 personas:</strong> 100€</li>
+                        <li><strong>3 personas:</strong> 120€</li>
+                        <li><strong>4 personas:</strong> 150€</li>
+                    </ul>
                 </section>
             </a>
             <a href="reservar.html">
@@ -167,6 +200,12 @@
                     <h2>Suite Presidencial</h2>
                     <p>Nuestra suite más lujosa, con decoración exquisita, sala de estar privada y terraza con vistas panorámicas.</p>
                     <img src="img/habitaciones/suite.jpg" alt="Suite Presidencial">
+                    <ul id="informacion_deluxe">
+                        <li><strong>1 persona:</strong> 200€</li>
+                        <li><strong>2 personas:</strong> 250€</li>
+                        <li><strong>3 personas:</strong> 300€</li>
+                        <li><strong>4 personas:</strong> 350€</li>
+                    </ul>
                 </section>
             </a>
         </main>

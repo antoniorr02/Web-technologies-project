@@ -36,7 +36,7 @@
             max-width: 20%;
         }
         main {
-            margin-top: 180px;
+            margin-top: 200px;
         }
         h1 {
             text-align: center;
@@ -44,20 +44,92 @@
         }
 
         section {
-            background-image: url("img/fondo2.png");
+            background-image: url("img/fondo_azul_suave.png");
             background-size: cover;
             background-repeat:no-repeat;
             background-attachment: scroll;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin: 20px auto;
+            margin: 30px auto;
             max-width: 600px;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, scale 0.3s ease, padding-bottom 0.3s ease;
         }
 
         section:hover {
-            opacity: 0.7;
+            opacity: 0.9;
+            scale:calc(1.1);
+            padding-bottom: 50px;
+        }
+
+        section:hover #informacion_wifi {
+            font-size: 16px;
+            opacity: 1;
+            transition: font-size 0.3s ease, opacity 0.3s ease; /* Transiciones suaves */
+            margin-top: 50px;
+        }
+
+        #informacion_wifi {
+            font-size: 0px;
+            opacity: 0;
+            transition: font-size 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease; /* Transiciones suaves */
+            text-align: center;
+        }
+
+        section:hover #informacion_piscina {
+            font-size: 16px;
+            opacity: 1;
+            transition: font-size 0.3s ease, opacity 0.3s ease; /* Transiciones suaves */
+            margin-top: 10px;
+        }
+
+        #informacion_piscina {
+            font-size: 0px;
+            opacity: 0;
+            transition: font-size 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease; /* Transiciones suaves */
+            text-align: left;
+        }
+
+        section:hover #informacion_gym {
+            font-size: 16px;
+            opacity: 1;
+            transition: font-size 0.3s ease, opacity 0.3s ease; /* Transiciones suaves */
+            margin-top: 10px;
+        }
+
+        #informacion_gym {
+            font-size: 0px;
+            opacity: 0;
+            transition: font-size 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease; /* Transiciones suaves */
+            text-align: left;
+        }
+
+        section:hover #informacion_restaurante {
+            font-size: 16px;
+            opacity: 1;
+            transition: font-size 0.3s ease, opacity 0.3s ease; /* Transiciones suaves */
+            margin-top: 10px;
+        }
+
+        #informacion_restaurante {
+            font-size: 0px;
+            opacity: 0;
+            transition: font-size 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease; /* Transiciones suaves */
+            text-align: left;
+        }
+
+        section:hover #informacion_eventos {
+            font-size: 16px;
+            opacity: 1;
+            transition: font-size 0.3s ease, opacity 0.3s ease; /* Transiciones suaves */
+            margin-top: 10px;
+        }
+
+        #informacion_eventos {
+            font-size: 0px;
+            opacity: 0;
+            transition: font-size 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease; /* Transiciones suaves */
+            text-align: left;
         }
 
         h2 {
@@ -75,7 +147,7 @@
 
         img {
             display: block;
-            margin: 20px auto;
+            margin: 30px auto;
             max-width: 100%; /* Hace que la imagen sea responsiva */
             height: auto; /* Mantiene la proporción de la imagen */
             border-radius: 10px;
@@ -97,7 +169,7 @@
         }
 
         footer {
-            padding: 20px 10px;
+            padding: auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -107,7 +179,7 @@
 
         footer div {
             text-align: center;
-            margin-left: 20px;
+            margin: 20px;
         }
 
         footer div p {
@@ -121,19 +193,20 @@
             align-items: center;
         }
 
-        #registro {
-            flex-grow: 1;
-            text-align: right;
-            padding-right: 20px; /* Ajusta el espacio entre los elementos */
+        footer #iconos div{
+            transition: scale 0.3s ease;
         }
 
+        footer #iconos div:hover{
+            scale: calc(1.2);
+        }
 
     </style>
 </head>
 <body>
     <div class="contenedor">
         <header>
-            <img id="logo-largo" src="./img/logos/logo-largo.png" alt="Logo Hotel Luna">
+            <a href="presentacion.html"><img id="logo-largo" src="./img/logos/logo-largo.png" alt="Logo Hotel Palace"></a>
         </header>
         <main>
             <h1>Servicios del Hotel</h1>
@@ -142,30 +215,40 @@
                 <h2>Wifi Gratuito</h2>
                 <p>Disfruta de conexión a internet de alta velocidad en todo el hotel sin coste adicional.</p>
                 <img id="wifi" src="img/servicios/wifi.png" alt="Wifi Gratuito">
+                <div id="informacion_wifi"><strong>Pida la clave en recepción</strong></div>
             </section>
 
             <section>
                 <h2>Piscina</h2>
                 <p>Relájate y refréscate en nuestra amplia piscina al aire libre, perfecta para días soleados.</p>
                 <img src="img/servicios/piscina.png" alt="Piscina">
+                <div id="informacion_piscina"><strong>Olímpica:</strong> 200 metros con hasta 6 calles</div>
+                <div id="informacion_piscina"><strong>Infantil:</strong> ideal para los niños</div>
+                <div id="informacion_piscina"><strong>Trampolines:</strong> de 2, 4, y 6 metros</div>
             </section>
 
             <section>
                 <h2>Gimnasio</h2>
                 <p>Mantén tu rutina de ejercicios durante tu estancia en nuestro moderno gimnasio equipado con las últimas máquinas y equipos de entrenamiento.</p>
                 <img src="img/servicios/gym.png" alt="Gimnasio">
+                <div id="informacion_gym"><strong>Clases de yoga</strong></div>
+                <div id="informacion_gym"><strong>Sesiones de spining</strong></div>
+                <div id="informacion_gym"><strong>Body balance</strong></div>
+                <div id="informacion_gym"><strong>Iniciación en crossfit</strong></div>
             </section>
 
             <section>
                 <h2>Restaurante</h2>
                 <p>Disfruta de deliciosas comidas preparadas por chefs expertos en nuestro elegante restaurante, que ofrece una amplia variedad de platos locales e internacionales.</p>
-                <p><strong>Horarios de Restaurante:</strong></p>
-                <ul>
-                    <li><strong>Desayuno:</strong> 7:00 am - 11:00 am</li>
-                    <li><strong>Comida:</strong> 12:00 pm - 3:00 pm</li>
-                    <li><strong>Cena:</strong> 7:00 pm - 10:00 pm</li>
-                </ul>
                 <img src="img/servicios/restaurante.jpg" alt="Restaurante">
+                <div id="informacion_restaurante">
+                    <p><strong>Horarios de Restaurante:</strong></p>
+                    <ul>
+                        <li><strong>Desayuno:</strong> 7:00 am - 11:00 am</li>
+                        <li><strong>Comida:</strong> 12:00 pm - 3:00 pm</li>
+                        <li><strong>Cena:</strong> 7:00 pm - 10:00 pm</li>
+                    </ul>
+                </div>
             </section>
 
             <section>
@@ -184,7 +267,7 @@
             <section>
                 <h2>Actividades y Eventos</h2>
                 <p>Aquí en el Hotel Granada Palace ofrecemos una variedad de actividades y eventos para nuestros huéspedes:</p>
-                <ul>
+                <ul id="informacion_eventos">
                     <li><strong>Lunes:</strong> Clases de yoga a las 8:00 am</li>
                     <li><strong>Martes:</strong> Noche de cine en la piscina a las 20:00 pm</li>
                     <li><strong>Miércoles:</strong> Tour guiado por la ciudad a las 10:00 am</li>
