@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitaciones Palace</title>
+    <link rel="icon" href="img/logos/logo.png">
+    <style>
+        body {
+            background-image: url("img/fondo2.png");
+            background-size: cover;
+            background-repeat:no-repeat;
+            background-attachment: scroll;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .contenedor{
+            position:relative;
+            margin:auto;
+            width:100%;
+            height: auto;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+        }
+        #logo-largo {
+            max-width: 20%;
+        }
+        main {
+            margin-top: 180px;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        section {
+            background-image: url("img/fondo2.png");
+            background-size: cover;
+            background-repeat:no-repeat;
+            background-attachment: scroll;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            transition: opacity 0.3s ease;
+            color: black;
+        }
+
+        section:hover {
+            opacity: 0.7;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%; /* Hace que la imagen sea responsiva */
+            height: auto; /* Mantiene la proporción de la imagen */
+            border-radius: 10px;
+            max-width: 250px;
+        }
+
+        /* Estilo específico para la imagen del wifi */
+        #wifi {
+            max-width: 150px;
+        }
+
+        .fila{
+            position:relative;
+            margin:auto;
+            width:100%;
+            height: auto;
+            clear:both;
+            display:table;
+        }
+
+        footer {
+            padding: 20px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #85C1E9;
+            color: black;
+        }
+
+        footer div {
+            text-align: center;
+            margin-left: 20px;
+        }
+
+        footer div p {
+            font-size: 13px;
+            margin: 0;
+        }
+
+        footer #iconos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #registro {
+            flex-grow: 1;
+            text-align: right;
+            padding-right: 20px; /* Ajusta el espacio entre los elementos */
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <img id="logo-largo" src="./img/logos/logo-largo.png" alt="Logo Hotel Palace">
+        </header>
+        <main>
+            <h1>Habitaciones del Hotel Palace</h1>
+            <a href="reservar.html">
+                <section>
+                    <h2>Habitación Deluxe</h2>
+                    <p>Una habitación elegante y espaciosa con todas las comodidades necesarias para una estancia lujosa.</p>
+                    <img src="img/habitaciones/habitacion-estandar.jpg" alt="Habitación Deluxe">
+                </section>
+            </a>
+            <a href="reservar.html">
+                <section>
+                    <h2>Suite Junior</h2>
+                    <p>Una suite amplia y confortable con área de estar y vistas panorámicas de la ciudad de Granada.</p>
+                    <img src="img/habitaciones/suite_junior.jpg" alt="Suite Junior">
+                </section>
+            </a>
+            <a href="reservar.html">
+                <section>
+                    <h2>Habitación Familiar</h2>
+                    <p>Perfecta para familias, esta habitación ofrece espacio adicional y comodidades para todos los miembros de la familia.</p>
+                    <img src="img/habitaciones/familiar.jpg" alt="Habitación Familiar">
+                </section>
+            </a>
+            <a href="reservar.html">
+                <section>
+                    <h2>Suite Presidencial</h2>
+                    <p>Nuestra suite más lujosa, con decoración exquisita, sala de estar privada y terraza con vistas panorámicas.</p>
+                    <img src="img/habitaciones/suite.jpg" alt="Suite Presidencial">
+                </section>
+            </a>
+        </main>
+        <footer class="fila">
+            <div id="Informacion">
+                <p> C. Diego de Siloé, s/n, Granada <br> Teléfono: 958 30 12 22</p>
+            </div>
+            <div id="iconos">
+                <div>
+                    <a href="https://www.instagram.com/granadapalace/"><img src="img/redes/instagram.png" width="35"></a>
+                </div>
+                <div>
+                    <a href="https://www.facebook.com/HotelGranadaPalace/?locale=es_ES"><img src="img/redes/facebook.png" width="32"></a>
+                </div>
+                <div>
+                    <a href="https://api.whatsapp.com/send?phone=NUMERO"><img src="img/redes/whatsapp.png" width="35"></a> <!-- Falta cambiar NUMERO -->
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Palace</title>
+    <link rel="icon" href="img/logos/logo.png">
+    <style>
+        body {
+            background-image: url("img/fondo2.png");
+            background-size: cover;
+            background-repeat:no-repeat;
+            background-attachment: scroll;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .contenedor{
+            position:relative;
+            margin:auto;
+            width:100%;
+            height: auto;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+        }
+        #logo-largo {
+            max-width: 20%;
+        }
+        main {
+            margin-top: 180px;
+            margin-left: 60px;
+            margin-right: 60px;
+        }
+        h1 {
+            margin-top: 30px;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%; /* Hace que la imagen sea responsiva */
+            height: auto; /* Mantiene la proporción de la imagen */
+            border-radius: 10px;
+            max-width: 250px;
+        }
+
+        .imagen-izquierda {
+            float: left; /* Alinea la imagen a la izquierda */
+            margin-right: 20px; /* Ajusta el margen para separar del texto */
+            border-radius: 100%;
+        }
+
+        .imagen-derecha {
+            float: right; /* Alinea la imagen a la derecha */
+            margin-left: 20px; /* Ajusta el margen para separar del texto */
+            border-radius: 100%;
+        }
+
+        /* Estilo específico para la imagen del wifi */
+        #wifi {
+            max-width: 150px;
+        }
+
+        .fila{
+            margin:auto;
+            width:100%;
+            height: auto;
+            clear:both;
+        }
+
+        footer {
+            position: fixed; /* Cambiado de absolute a fixed */
+            bottom: 0; /* Ajustado para que el footer se coloque en la parte inferior */
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #85C1E9;
+            color: black;
+        }
+
+
+        footer div {
+            text-align: center;
+            margin-left: 20px;
+        }
+
+        footer div p {
+            font-size: 13px;
+            margin: 0;
+        }
+
+        footer #iconos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <img id="logo-largo" src="./img/logos/logo-largo.png" alt="Logo Hotel Luna">
+        </header>
+        <main>
+            <h1>¿Quiénes somos?</h1>
+            
+            <p>Bienvenidos al Hotel Granada Palace, un oasis de elegancia y confort en el corazón de la histórica ciudad de Granada.</p>
+            
+            <img src="img/servicios/hotel-fachada.webp" class="imagen-izquierda">
+
+            <p>Nuestra historia se remonta a más de dos décadas, cuando el Hotel Granada Palace abrió sus puertas por primera vez. Desde entonces, nos hemos comprometido a ofrecer a nuestros huéspedes una experiencia inolvidable, combinando la rica herencia cultural de Granada con servicios de primera clase y una hospitalidad excepcional.</p>
+            
+            <p>Situado en el encantador barrio de Diego de Siloé, nuestro hotel es un tributo a la arquitectura andaluza, con detalles que evocan la majestuosidad de la Alhambra y la belleza de los jardines del Generalife. Cada rincón del Hotel Granada Palace está diseñado para ofrecer una experiencia única, donde el lujo y la comodidad se fusionan a la perfección.</p>
+            
+            <img src="img/servicios/interior.jpg" class="imagen-derecha">
+
+            <p>Desde nuestras lujosas habitaciones y suites hasta nuestras exclusivas instalaciones, como nuestro spa de clase mundial y nuestra exquisita gastronomía, cada aspecto de su estancia ha sido cuidadosamente diseñado para superar sus expectativas.</p>
+            
+            <p>Pero más allá de nuestras comodidades y servicios, lo que realmente nos distingue es nuestro equipo. Nuestro personal dedicado está comprometido a brindarle un servicio personalizado y atento en todo momento, asegurándose de que su estancia en el Hotel Granada Palace sea verdaderamente inolvidable.</p>
+            
+            <p>Ya sea que esté aquí por negocios o por placer, le invitamos a sumergirse en la magia de Granada desde la comodidad y el lujo de nuestro hotel. Esperamos darle la bienvenida pronto y hacer que su estancia sea una experiencia que recordará con cariño durante años.</p>
+        </main>
+        
+        <footer class="fila">
+
+            <div id="Informacion">
+                <p> C. Diego de Siloé, s/n, Granada <br> Teléfono: 958 30 12 22</p>
+            </div>
+
+            <div id="iconos">
+                
+                <div>
+                    
+                    <a href="https://www.instagram.com/granadapalace/"><img src="img/redes/instagram.png" width="35"></a>
+
+                </div>
+
+                <div>
+                    
+                    <a href="https://www.facebook.com/HotelGranadaPalace/?locale=es_ES"><img src="img/redes/facebook.png" width="32"></a>
+
+                </div>
+
+                <div>
+                    
+                    <a href="https://api.whatsapp.com/send?phone=NUMERO"><img src="img/redes/whatsapp.png" width="35"></a> <!-- Falta cambiar NUMERO -->
+
+                </div>
+
+            </div>
+            
+        </footer>
+    </div>
+</body>
+</html>

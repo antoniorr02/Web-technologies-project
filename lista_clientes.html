@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Clientes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px; /* Bordes redondeados */
+            overflow: hidden; /* Ocultar los bordes redondeados de las celdas fuera de la tabla */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-group .btn {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listado de Clientes</h1>
+
+    <div class="btn-group">
+        <a href="#" class="btn">Añadir Cliente</a>
+        <a href="#" class="btn">Editar Cliente</a>
+        <a href="#" class="btn">Eliminar Cliente</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Juan</td>
+                <td>Pérez</td>
+                <td>juan@example.com</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>María</td>
+                <td>Gómez</td>
+                <td>maria@example.com</td>
+            </tr>
+            <!-- Añade más filas según necesites -->
+        </tbody>
+    </table>
+</body>
+</html>

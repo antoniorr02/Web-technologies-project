@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Palace</title>
+    <link rel="icon" href="img/logos/logo.png">
+    <style>
+        body {
+            background-image: url("img/fondo2.png");
+            background-size: cover;
+            background-repeat:no-repeat;
+            background-attachment: scroll;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .contenedor{
+            position:relative;
+            margin:auto;
+            width:100%;
+            height: auto;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+        }
+        #logo-largo {
+            max-width: 20%;
+        }
+        main {
+            margin-top: 180px;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        section {
+            background-image: url("img/fondo2.png");
+            background-size: cover;
+            background-repeat:no-repeat;
+            background-attachment: scroll;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            transition: opacity 0.3s ease;
+        }
+
+        section:hover {
+            opacity: 0.7;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%; /* Hace que la imagen sea responsiva */
+            height: auto; /* Mantiene la proporción de la imagen */
+            border-radius: 10px;
+            max-width: 250px;
+        }
+
+        /* Estilo específico para la imagen del wifi */
+        #wifi {
+            max-width: 150px;
+        }
+
+        .fila{
+            position:relative;
+            margin:auto;
+            width:100%;
+            height: auto;
+            clear:both;
+            display:table;
+        }
+
+        footer {
+            padding: 20px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #85C1E9;
+            color: black;
+        }
+
+        footer div {
+            text-align: center;
+            margin-left: 20px;
+        }
+
+        footer div p {
+            font-size: 13px;
+            margin: 0;
+        }
+
+        footer #iconos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #registro {
+            flex-grow: 1;
+            text-align: right;
+            padding-right: 20px; /* Ajusta el espacio entre los elementos */
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <img id="logo-largo" src="./img/logos/logo-largo.png" alt="Logo Hotel Luna">
+        </header>
+        <main>
+            <h1>Servicios del Hotel</h1>
+
+            <section>
+                <h2>Wifi Gratuito</h2>
+                <p>Disfruta de conexión a internet de alta velocidad en todo el hotel sin coste adicional.</p>
+                <img id="wifi" src="img/servicios/wifi.png" alt="Wifi Gratuito">
+            </section>
+
+            <section>
+                <h2>Piscina</h2>
+                <p>Relájate y refréscate en nuestra amplia piscina al aire libre, perfecta para días soleados.</p>
+                <img src="img/servicios/piscina.png" alt="Piscina">
+            </section>
+
+            <section>
+                <h2>Gimnasio</h2>
+                <p>Mantén tu rutina de ejercicios durante tu estancia en nuestro moderno gimnasio equipado con las últimas máquinas y equipos de entrenamiento.</p>
+                <img src="img/servicios/gym.png" alt="Gimnasio">
+            </section>
+
+            <section>
+                <h2>Restaurante</h2>
+                <p>Disfruta de deliciosas comidas preparadas por chefs expertos en nuestro elegante restaurante, que ofrece una amplia variedad de platos locales e internacionales.</p>
+                <p><strong>Horarios de Restaurante:</strong></p>
+                <ul>
+                    <li><strong>Desayuno:</strong> 7:00 am - 11:00 am</li>
+                    <li><strong>Comida:</strong> 12:00 pm - 3:00 pm</li>
+                    <li><strong>Cena:</strong> 7:00 pm - 10:00 pm</li>
+                </ul>
+                <img src="img/servicios/restaurante.jpg" alt="Restaurante">
+            </section>
+
+            <section>
+                <h2>Servicio de Habitaciones</h2>
+                <p>Descansa y relájate en la comodidad de tu habitación mientras nuestro servicio de habitaciones te brinda una amplia selección de platos y bebidas las 24 horas del día.</p>
+                <img src="img/servicios/servicioshabitaciones.jpeg" alt="Servicio de Habitaciones">
+            </section>
+
+            <section>
+                <h2>Spa y Bienestar</h2>
+                <p>Sumérgete en un oasis de relajación y rejuvenecimiento en nuestro lujoso spa, donde podrás disfrutar de una variedad de tratamientos corporales, faciales y masajes.</p>
+                <img src="img/servicios/spa2.jpeg" alt="Spa y Bienestar">
+            </section>
+
+            <!-- Nueva sección de actividades y eventos -->
+            <section>
+                <h2>Actividades y Eventos</h2>
+                <p>Aquí en el Hotel Granada Palace ofrecemos una variedad de actividades y eventos para nuestros huéspedes:</p>
+                <ul>
+                    <li><strong>Lunes:</strong> Clases de yoga a las 8:00 am</li>
+                    <li><strong>Martes:</strong> Noche de cine en la piscina a las 20:00 pm</li>
+                    <li><strong>Miércoles:</strong> Tour guiado por la ciudad a las 10:00 am</li>
+                    <li><strong>Jueves:</strong> Degustación de vinos locales a las 18:00 pm</li>
+                    <li><strong>Viernes:</strong> Concierto de música en vivo en el bar del hotel a las 21:00 pm</li>
+                    <li><strong>Sábado:</strong> Excursión de senderismo por las montañas a las 9:00 am</li>
+                    <li><strong>Domingo:</strong> Brunch dominical en nuestro restaurante a las 11:00 am</li>
+                </ul>
+            </section>
+        </main>
+        <footer class="fila">
+
+            <div id="Informacion">
+                <p> C. Diego de Siloé, s/n, Granada <br> Teléfono: 958 30 12 22</p>
+            </div>
+
+            <div id="iconos">
+                
+                <div>
+                    
+                    <a href="https://www.instagram.com/granadapalace/"><img src="img/redes/instagram.png" width="35"></a>
+
+                </div>
+
+                <div>
+                    
+                    <a href="https://www.facebook.com/HotelGranadaPalace/?locale=es_ES"><img src="img/redes/facebook.png" width="32"></a>
+
+                </div>
+
+                <div>
+                    
+                    <a href="https://api.whatsapp.com/send?phone=NUMERO"><img src="img/redes/whatsapp.png" width="35"></a> <!-- Falta cambiar NUMERO -->
+
+                </div>
+
+            </div>
+            
+        </footer>
+    </div>
+</body>
+</html>
