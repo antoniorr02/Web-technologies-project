@@ -7,7 +7,7 @@ GLOBAL
 	padding:0px;
 	list-style: none;
 	text-decoration: none;
-	font-family: sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	box-sizing: border-box;
 }
 
@@ -47,12 +47,31 @@ header #logo{
 	font-size:50px;
 	text-align:center;
 	line-height:60px;
+	border-radius: 10px;
+	transition: scale 0.3s ease;
+}
+
+header #logo:hover{
+	scale: calc(1.05);
+}
+
+header #logo:active{
+	scale: calc(0.9);
 }
 
 header #logo-largo {
+	transition: scale 0.3s ease;
 	float: right;
+	border-radius: 10px;
 }
 
+header #logo-largo:hover{
+	scale: calc(1.05);
+}
+
+header #logo-largo:active{
+	scale: calc(0.9);
+}
 
 /*=============================================
 SECCION 2
@@ -66,17 +85,21 @@ nav ul li{
 nav ul li a{
 	display: block;
 	background:#1A5276;
-	font-family: 'Kaushan Script', cursive;
+	font-family: Arial, Helvetica, sans-serif cursive;
 	color:white;
-	line-height:48px;	
+	line-height:48px;
+	border-radius: 5px;	
+	transition: scale 0.3s ease;
 }
 
 nav ul li a:hover{
 	background:#2980B9;
+	scale: calc(1.1);
 }
 
 nav ul li a:active{
 	background:#5499C7;
+	scale: calc(0.9);
 }
 
 /*=============================================
@@ -105,10 +128,19 @@ SECCION 3
 	width:200px;
 	height:200px;
 	padding:10px;
+	transition: scale 0.3s ease;
+}
+
+#seccion3 img:hover{
+	scale: calc(1.1);
+}
+
+#seccion3 img:active{
+	scale: calc(0.9);
 }
 
 #seccion3 h1{
-	font-family: 'Kaushan Script', cursive;
+	font-family: Arial, Helvetica, sans-serif, cursive;
 	font-size:40px;
 	padding:10px;
 }
@@ -142,6 +174,17 @@ footer #iconos{
 	line-height:0px;
 }
 
+footer #iconos div{
+	transition: scale 0.3s ease;
+}
+
+footer #iconos div:hover{
+	scale: calc(1.2);
+}
+
+footer #iconos div:active{
+	scale: calc(0.9);
+}
 
 #registro{
 	line-height:55px;

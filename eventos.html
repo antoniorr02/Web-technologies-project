@@ -44,20 +44,22 @@
         }
 
         section {
-            background-image: url("img/fondo2.png");
+            background-image: url("img/fondo_azul_suave.png");
             background-size: cover;
             background-repeat:no-repeat;
             background-attachment: scroll;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin: 20px auto;
+            margin: 30px auto;
             max-width: 600px;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, scale 0.3s ease, padding-bottom 0.3s ease;
         }
 
         section:hover {
-            opacity: 0.7;
+            opacity: 0.9;
+            scale:calc(1.1);
+            padding-bottom: 50px;
         }
 
         h2 {
@@ -121,12 +123,13 @@
             align-items: center;
         }
 
-        #registro {
-            flex-grow: 1;
-            text-align: right;
-            padding-right: 20px; /* Ajusta el espacio entre los elementos */
+        footer #iconos div{
+            transition: scale 0.3s ease;
         }
 
+        footer #iconos div:hover{
+            scale: calc(1.2);
+        }
 
     </style>
 </head>
