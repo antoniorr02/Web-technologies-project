@@ -240,9 +240,10 @@
                 $correo = $_POST['correo'];
                 $clave = $_POST['clave'];
                 $datos = $_POST['datos'];
+                $tipo_usuario = "cliente";
                 
                 // Insertar usuario
-                insertar_usuario($nombre, $apellidos, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $clave, $datos);
+                insertar_usuario($nombre, $apellidos, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $clave, $datos, $tipo_usuario);
             }
         }
     ?>
