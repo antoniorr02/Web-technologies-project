@@ -233,6 +233,7 @@
 
                 $nombre = $_POST['nombre'];
                 $apellidos = $_POST['apellidos'];
+                $tarjeta = $_POST["tarjeta"];
                 $dni = $_POST['dni'];
                 $nacionalidad = $_POST['nacionalidad'];
                 $fecha_nacimiento = $_POST['fecha_nacimiento'];
@@ -243,7 +244,7 @@
                 $tipo_usuario = "cliente";
                 
                 // Insertar usuario
-                insertar_usuario($nombre, $apellidos, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $clave, $datos, $tipo_usuario);
+                insertar_usuario($nombre, $apellidos, $tarjeta, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $clave, $datos, $tipo_usuario);
             }
         }
     ?>

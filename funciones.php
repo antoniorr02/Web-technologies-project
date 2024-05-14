@@ -2,17 +2,17 @@
 include 'conexion.php';
 
 // Función para insertar un usuario
-function insertar_usuario($nombre, $apellidos, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $clave, $datos, $tipo_usuario) {
+function insertar_usuario($nombre, $apellidos, $dni, $tarjeta, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $clave, $datos, $tipo_usuario) {
     global $conn;
     
     // Hash de la contraseña
     $hashed_clave = password_hash($clave, PASSWORD_DEFAULT);
 
     // Preparar la declaración
-    $stmt = $conn->prepare("INSERT INTO usuarios_hotel (nombre, apellidos, dni, nacionalidad, fecha_nacimiento, sexo, correo, clave, datos, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO usuarios_hotel (nombre, apellidos, tarjeta, dni, nacionalidad, fecha_nacimiento, sexo, correo, clave, datos, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
     // Vincular parámetros
-    $stmt->bind_param("ssssssssss", $nombre, $apellidos, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $hashed_clave, $datos, $tipo_usuario);
+    $stmt->bind_param("ssssssssss", $nombre, $apellidos, $tarjeta, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $hashed_clave, $datos, $tipo_usuario);
 
     $stmt->execute();
 }
@@ -42,6 +42,7 @@ foreach ($usuarios as $usuario) {
     echo "ID: " . $usuario['id'] . "<br>";
     echo "Nombre: " . $usuario['nombre'] . "<br>";
     echo "Apellidos: " . $usuario['apellidos'] . "<br>";
+    echo "Tarjeta" . $usuario['tarjeta'] . "<br>";
     echo "DNI: " . $usuario['dni'] . "<br>";
     echo "Nacionalidad: " . $usuario['nacionalidad'] . "<br>";
     echo "Fecha de Nacimiento: " . $usuario['fecha_nacimiento'] . "<br>";
@@ -67,17 +68,17 @@ function borrar_usuario($id) {
 }
 
 // Función para modificar un usuario
-function modificar_usuario($id, $nombre, $apellidos, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $clave, $datos, $tipo_usuario) {
+function modificar_usuario($id, $nombre, $apellidos, $tarjeta, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $clave, $datos, $tipo_usuario) {
     global $conn;
     
     // Hash de la contraseña
     $hashed_clave = password_hash($clave, PASSWORD_DEFAULT);
     
     // Preparar la declaración
-    $stmt = $conn->prepare("UPDATE usuarios_hotel SET nombre = ?, apellidos = ?, dni = ?, nacionalidad = ?, fecha_nacimiento = ?, sexo = ?, correo = ?, clave = ?, datos = ?, tipo_usuario WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE usuarios_hotel SET nombre = ?, apellidos = ?, tarjeta = ?, dni = ?, nacionalidad = ?, fecha_nacimiento = ?, sexo = ?, correo = ?, clave = ?, datos = ?, tipo_usuario WHERE id = ?");
     
     // Vincular parámetros
-    $stmt->bind_param("ssssssssssi", $nombre, $apellidos, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $hashed_clave, $datos, $tipo_usuario, $id);
+    $stmt->bind_param("ssssssssssi", $nombre, $apellidos, $tarjeta, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $hashed_clave, $datos, $tipo_usuario, $id);
 
     $stmt->execute();
 }
