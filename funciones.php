@@ -9,10 +9,10 @@ function insertar_usuario($nombre, $apellidos, $dni, $tarjeta, $nacionalidad, $f
     $hashed_clave = password_hash($clave, PASSWORD_DEFAULT);
 
     // Preparar la declaración
-    $stmt = $conn->prepare("INSERT INTO usuarios_hotel (nombre, apellidos, tarjeta, dni, nacionalidad, fecha_nacimiento, sexo, correo, clave, datos, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO usuarios_hotel (nombre, apellidos, dni, tarjeta_credito, nacionalidad, fecha_nacimiento, sexo, correo, clave_hashed, datos, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
     // Vincular parámetros
-    $stmt->bind_param("ssssssssss", $nombre, $apellidos, $tarjeta, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $hashed_clave, $datos, $tipo_usuario);
+    $stmt->bind_param("sssssssssss", $nombre, $apellidos, $tarjeta, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $hashed_clave, $datos, $tipo_usuario);
 
     $stmt->execute();
 }
