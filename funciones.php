@@ -109,5 +109,93 @@ function obtener_usuario_por_id($id_usuario) {
     // Devolver los datos del usuario
     return $usuario;
 }
+
+
+// Función para insertar una habitación
+function insertar_habitacion($numero_habitacion, $capacidad, $precio_noche, $descripcion) {
+    global $conn;
+
+    // Preparar la declaración
+    $stmt = $conn->prepare("INSERT INTO habitaciones_hotel (numero_habitacion, capacidad, precio_noche, descripcion) VALUES (?, ?, ?, ?)");
+    
+    // Vincular parámetros
+    $stmt->bind_param("sids", $numero_habitacion, $capacidad, $precio_noche, $descripcion);
+
+    $stmt->execute();
+}
+
+// Función para obtener todas las habitaciones
+function obtener_habitaciones() {
+    global $conn;
+    
+    $sql = "SELECT * FROM habitaciones_hotel";
+    $result = $conn->query($sql);
+    
+    $habitaciones = array();
+    
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $habitaciones[] = $row;
+        }
+    }
+    
+    return $habitaciones;
+}
+
+// Función para borrar una habitación por su ID
+function borrar_habitacion($id_habitacion) {
+    global $conn;
+
+    // Preparar la declaración
+    $stmt = $conn->prepare("DELETE FROM habitaciones_hotel WHERE id = ?");
+    
+    // Vincular parámetros
+    $stmt->bind_param("i", $id_habitacion);
+
+    $stmt->execute();
+}
+
+// Función para modificar una habitación
+function modificar_habitacion($id_habitacion, $numero_habitacion, $capacidad, $precio_noche, $descripcion) {
+    global $conn;
+    
+    // Preparar la declaración
+    $stmt = $conn->prepare("UPDATE habitaciones_hotel SET numero_habitacion = ?, capacidad = ?, precio_noche = ?, descripcion = ? WHERE id = ?");
+    
+    // Vincular parámetros
+    $stmt->bind_param("sidsi", $numero_habitacion, $capacidad, $precio_noche, $descripcion, $id_habitacion);
+
+    $stmt->execute();
+}
+
+// Función para obtener una habitación por su ID
+function obtener_habitacion_por_id($id_habitacion) {
+    global $conn;
+    
+    // Consulta SQL para obtener los datos de la habitación por su ID
+    $sql = "SELECT * FROM habitaciones_hotel WHERE id = ?";
+    
+    // Preparar la consulta
+    $stmt = $conn->prepare($sql);
+    
+    // Vincular parámetros
+    $stmt->bind_param('i', $id_habitacion);
+    
+    // Ejecutar la consulta
+    $stmt->execute();
+    
+    // Obtener el resultado de la consulta
+    $result = $stmt->get_result();
+    
+    // Obtener los datos de la habitación
+    $habitacion = $result->fetch_assoc();
+    
+    // Liberar el resultado
+    $result->free();
+    
+    // Devolver los datos de la habitación
+    return $habitacion;
+}
+
 ?>
 
