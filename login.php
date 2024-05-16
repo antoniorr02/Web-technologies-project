@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
         $_SESSION['id'] = $user_id;
         
         // Redireccionar al usuario a la página de inicio de sesión exitosa
-        header("Location: {$_SERVER['login.html']}");
+        header("Location: {$_SERVER['main.html']}");
     } else {
         // Si las credenciales son incorrectas, redireccionar al usuario a la página de inicio de sesión de nuevo
         header("Location: {$_SERVER['PHP_SELF']}");
