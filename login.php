@@ -1,8 +1,9 @@
 <?php
-include "conexion.php";
-global $conn;
 // Iniciar sesión
 session_start();
+
+include "conexion.php";
+global $conn;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
     // Obtener los datos del formulario
@@ -26,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
         header("Location: {$_SERVER['login.html']}");
     } else {
         // Si las credenciales son incorrectas, redireccionar al usuario a la página de inicio de sesión de nuevo
-        header("Location: login.html");
+        header("Location: {$_SERVER['PHP_SELF']}");
     }
 }
 ?>
