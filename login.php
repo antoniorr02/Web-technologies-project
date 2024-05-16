@@ -1,3 +1,36 @@
+<?php
+include "conexion.php";
+global $conn;
+// Iniciar sesión
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
+    // Obtener los datos del formulario
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Consultar la base de datos para verificar las credenciales
+    $sql = "SELECT id FROM usuarios_hotel WHERE correo = '$email' AND clave_hashed = '$password'";
+    $result = $conn->query($sql);
+
+    // Verificar si se encontró un usuario con las credenciales proporcionadas
+    if ($result->num_rows > 0) {
+        // Obtener el ID del usuario
+        $row = $result->fetch_assoc();
+        $user_id = $row['id'];
+        
+        // Guardar el ID del usuario en la sesión
+        $_SESSION['id'] = $user_id;
+        
+        // Redireccionar al usuario a la página de inicio de sesión exitosa
+        header("Location: {$_SERVER['login.html']}");
+    } else {
+        // Si las credenciales son incorrectas, redireccionar al usuario a la página de inicio de sesión de nuevo
+        header("Location: login.html");
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -79,7 +112,7 @@
 <body>
     <div class="login-container">
         <h2>Iniciar Sesión</h2>
-        <form action="#" method="POST">
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
                 <input type="email" id="email" name="email" required>
