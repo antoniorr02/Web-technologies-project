@@ -197,5 +197,60 @@ function obtener_habitacion_por_id($id_habitacion) {
     return $habitacion;
 }
 
+function obtener_imagenes_habitacion($habitacion_id) {
+    global $conn;
+
+    // Consulta SQL para obtener las imágenes de la habitación por su ID
+    $sql = "SELECT * FROM fotos_habitacion WHERE habitacion_id = ?";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($sql);
+
+    // Vincular parámetros
+    $stmt->bind_param('i', $habitacion_id);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Obtener el resultado de la consulta
+    $result = $stmt->get_result();
+
+    // Inicializar un array para almacenar las imágenes
+    $imagenes = array();
+
+    // Recorrer el resultado y almacenar las imágenes en el array
+    while ($row = $result->fetch_assoc()) {
+        $imagenes[] = $row;
+    }
+
+    // Liberar el resultado
+    $result->free();
+
+    // Devolver las imágenes de la habitación
+    return $imagenes;
+}
+
+// Función para eliminar una foto por su ID
+function eliminar_foto($id_foto) {
+    global $conn;
+
+    // Preparar la declaración
+    $stmt = $conn->prepare("DELETE FROM fotos_habitacion WHERE id = ?");
+    
+    // Vincular parámetros
+    $stmt->bind_param("i", $id_foto);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se eliminó correctamente
+    if ($stmt->affected_rows > 0) {
+        return true; // La foto se eliminó correctamente
+    } else {
+        return false; // No se pudo eliminar la foto
+    }
+}
+
+
 ?>
 
