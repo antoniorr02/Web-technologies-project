@@ -460,7 +460,7 @@
 		<nav class="fila">
 			
 			<ul>
-				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="habitaciones.html">Habitaciones</a></li>
+				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="habitaciones.php">Habitaciones</a></li>
 				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="servicios.html">Servicios</a></li>
 				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="presentacion.html">¿Quién somos?</a></li>
 				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="eventos.html">Eventos</a></li>
@@ -486,7 +486,7 @@
 			SECCION 3
 			=============================================-->
 			<div id="seccion3" class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-				<a href="habitaciones.html">
+				<a href="habitaciones.php">
 					<div id="caja1" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<img src="img/habitaciones/habitacion_doble.jpg">
 						<h2>Habitaciones</h2>

@@ -164,6 +164,53 @@
         </header>
         <main>
             <h1>Habitaciones del Hotel Palace</h1>
+            <?php
+                include 'funciones.php'; 
+
+                $habitaciones = obtener_habitaciones();
+
+                // Verificar si hay resultados
+                if (!empty($habitaciones)) {
+                    // Loop a través de cada fila de resultados
+                    foreach($habitaciones as $habitacion) {
+                        // Generar el HTML para cada habitación
+                        echo '<section>';
+                        echo '<h2>' . htmlspecialchars($habitacion['numero_habitacion']) . '</h2>';
+                        echo '<p>' . htmlspecialchars($habitacion['descripcion']) . '</p>';
+                        echo '<img src="ruta/a/la/imagen.jpg" alt="Habitación">';
+                        echo '<ul id="informacion_deluxe">';
+                        echo '<li><strong>Capacidad:</strong> ' . htmlspecialchars($habitacion['capacidad']) . '</li>';
+                        echo '<li><strong>Precio por noche:</strong> ' . htmlspecialchars($habitacion['precio_noche']) . '€</li>';
+                        echo '</ul>';
+                        echo '</section>';
+                    }
+                }
+
+                // Cerrar la conexión
+                $conn->close();
+                ?>
+
+        </main>
+        <footer class="fila">
+            <div id="Informacion">
+                <p> C. Diego de Siloé, s/n, Granada <br> Teléfono: 958 30 12 22</p>
+            </div>
+            <div id="iconos">
+                <div>
+                    <a href="https://www.instagram.com/granadapalace/"><img src="img/redes/instagram.png" width="35"></a>
+                </div>
+                <div>
+                    <a href="https://www.facebook.com/HotelGranadaPalace/?locale=es_ES"><img src="img/redes/facebook.png" width="32"></a>
+                </div>
+                <div>
+                    <a href="https://api.whatsapp.com/send?phone=NUMERO"><img src="img/redes/whatsapp.png" width="35"></a> <!-- Falta cambiar NUMERO -->
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+<!-- 
             <a href="reservar.html">
                 <section>
                     <h2>Habitación Deluxe</h2>
@@ -215,24 +262,4 @@
                         <li><strong>4 personas:</strong> 350€</li>
                     </ul>
                 </section>
-            </a>
-        </main>
-        <footer class="fila">
-            <div id="Informacion">
-                <p> C. Diego de Siloé, s/n, Granada <br> Teléfono: 958 30 12 22</p>
-            </div>
-            <div id="iconos">
-                <div>
-                    <a href="https://www.instagram.com/granadapalace/"><img src="img/redes/instagram.png" width="35"></a>
-                </div>
-                <div>
-                    <a href="https://www.facebook.com/HotelGranadaPalace/?locale=es_ES"><img src="img/redes/facebook.png" width="32"></a>
-                </div>
-                <div>
-                    <a href="https://api.whatsapp.com/send?phone=NUMERO"><img src="img/redes/whatsapp.png" width="35"></a> <!-- Falta cambiar NUMERO -->
-                </div>
-            </div>
-        </footer>
-    </div>
-</body>
-</html>
+            </a> -->
