@@ -23,8 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
         // Guardar el ID del usuario en la sesión
         $_SESSION['id'] = $user_id;
         
+        registrar_evento("Usuario registrado", $user_id);
         // Redireccionar al usuario a la página de inicio de sesión exitosa
-        header("Location: main.html");
+        header("Location: main.php");
         exit();
     } else {
         // Si las credenciales son incorrectas, redireccionar al usuario a la página de inicio de sesión de nuevo

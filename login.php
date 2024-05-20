@@ -2,7 +2,7 @@
 // Iniciar sesión
 session_start();
 
-include "conexion.php";
+include "funciones.php";
 global $conn;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
@@ -22,11 +22,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
         
         // Guardar el ID del usuario en la sesión
         $_SESSION['id'] = $user_id;
+
+        registrar_evento("Usuario identificado", $user_id);
         
         // Redireccionar al usuario a la página de inicio de sesión exitosa
         header("Location: main.php");
         exit();
     } else {
+        registrar_evento("Intento de identificación erróneo");
         // Si las credenciales son incorrectas, redireccionar al usuario a la página de inicio de sesión de nuevo
         header("Location: {$_SERVER['PHP_SELF']}");
         exit();

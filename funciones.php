@@ -251,6 +251,14 @@ function eliminar_foto($id_foto) {
     }
 }
 
+function registrar_evento($descripcion, $user_id = null) {
+    global $conn;
+    $sql = "INSERT INTO logs (descripcion, user_id) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('si', $descripcion, $user_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
 
 ?>
-

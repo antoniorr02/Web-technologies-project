@@ -528,6 +528,8 @@
                         if (!$usuario) {
                             echo '<button id="boton"><a href="login.php">Login</a></button>';
                             echo '<button id="boton"><a href="formulario_registro.php">Registro</a></button>';
+                        } else {
+                            echo '<button id="boton"><a href="cerrar_sesion.php">Cerrar sesion</a></button>';
                         }
                     ?>
 				</aside>
