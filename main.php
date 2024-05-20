@@ -1,5 +1,13 @@
 <?php
     session_start();
+
+    include "funciones.php";
+
+    // Verificar si hay una sesión activa y obtener los datos del usuario
+    $usuario = null;
+    if (isset($_SESSION['id'])) {
+        $usuario = obtener_usuario_por_id($_SESSION['id']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -457,7 +465,19 @@
 				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="presentacion.html">¿Quién somos?</a></li>
 				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="eventos.html">Eventos</a></li>
 				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="#">Contacto</a></li>
-				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="login.php">Login</a></li>
+                <?php
+                    if ($usuario) {
+                        if ($usuario['tipo_usuario'] == "Cliente") {
+                            echo '<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="#">Mi usuario</a></li>';
+                        } else if ($usuario['tipo_usuario'] == "Recepcionista") {
+                            echo '<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="#">Gestión</a></li>';
+                        } else {
+                            echo '<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="#">Administración</a></li>';
+                        }
+                    } else {
+                        echo '<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="login.php">Login</a></li>';
+                    }
+                ?>
 			</ul>
 
 		</nav>
@@ -505,7 +525,7 @@
 					<p>Capacidad total del hotel: [Insertar número]</p>
 					<p>Número de huéspedes alojados: [Insertar número]</p>
                     <?php
-                        if (!isset($_SESSION['id'])) {
+                        if (!$usuario) {
                             echo '<button id="boton"><a href="login.php">Login</a></button>';
                             echo '<button id="boton"><a href="formulario_registro.php">Registro</a></button>';
                         }
