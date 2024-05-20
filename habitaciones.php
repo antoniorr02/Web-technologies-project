@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -154,6 +158,29 @@
             padding-right: 20px; /* Ajusta el espacio entre los elementos */
         }
 
+        button {
+            display: block; /* Hace que los botones sean bloques */
+            width: 100%; /* Ancho completo */
+            padding: 10px 0; /* Relleno */
+            margin-top: 15px; /* Espacio superior */
+            background-color: #007bff; /* Color de fondo del botón */
+            color: white; /* Color del texto del botón */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Bordes redondeados */
+            font-size: 16px; /* Tamaño del texto */
+            cursor: pointer; /* Cursor al pasar sobre el botón */
+            transition: all 0.3s ease; /* Transición suave del color de fondo */
+        }
+
+        button a {
+            color: white; 
+            text-decoration: none; 
+        }
+
+        button:hover {
+            background-color: #0056b3; 
+            scale: 1.05;
+        }
 
     </style>
 </head>
@@ -163,14 +190,26 @@
             <a href="presentacion.html"><img id="logo-largo" src="./img/logos/logo-largo.png" alt="Logo Hotel Palace"></a>
         </header>
         <main>
-            <h1>Habitaciones del Hotel Palace</h1>
-            <?php
+            <?php                
                 include 'funciones.php'; 
+
+                // Verificar si hay una sesión activa y obtener los datos del usuario
+                $usuario = null;
+                if (isset($_SESSION['id'])) {
+                    $usuario = obtener_usuario_por_id($_SESSION['id']);
+                }
+
+                if($usuario) {
+                    if ($usuario['tipo_usuario'] == "Cliente" || $usuario['tipo_usuario'] == "Recepcionista") {
+                        echo '<button id="boton"><a href="formulario_reserva.php">Acceder Formulario Reserva</a></button>';
+                    }
+                }
 
                 $habitaciones = obtener_habitaciones();
 
                 // Verificar si hay resultados
                 if (!empty($habitaciones)) {
+                    echo '<h1>Habitaciones del Hotel Palace</h1>';
                     // Loop a través de cada fila de resultados
                     foreach($habitaciones as $habitacion) {
                         // Generar el HTML para cada habitación
@@ -210,56 +249,3 @@
     </div>
 </body>
 </html>
-<!-- 
-            <a href="reservar.html">
-                <section>
-                    <h2>Habitación Deluxe</h2>
-                    <p>Una habitación elegante y espaciosa con todas las comodidades necesarias para una estancia lujosa.</p>
-                    <img src="img/habitaciones/habitacion-estandar.jpg" alt="Habitación Deluxe">
-                    <ul id="informacion_deluxe">
-                        <li><strong>1 persona:</strong> 120€</li>
-                        <li><strong>2 personas:</strong> 150€</li>
-                        <li><strong>3 personas:</strong> 180€</li>
-                        <li><strong>4 personas:</strong> 220€</li>
-                    </ul>
-                </section>
-            </a>
-            <a href="reservar.html">
-                <section>
-                    <h2>Suite Junior</h2>
-                    <p>Una suite amplia y confortable con área de estar y vistas panorámicas de la ciudad de Granada.</p>
-                    <img src="img/habitaciones/suite_junior.jpg" alt="Suite Junior">
-                    <ul id="informacion_deluxe">
-                        <li><strong>1 persona:</strong> 100€</li>
-                        <li><strong>2 personas:</strong> 120€</li>
-                        <li><strong>3 personas:</strong> 150€</li>
-                        <li><strong>4 personas:</strong> 180€</li>
-                    </ul>
-                </section>
-            </a>
-            <a href="reservar.html">
-                <section>
-                    <h2>Habitación Familiar</h2>
-                    <p>Perfecta para familias, esta habitación ofrece espacio adicional y comodidades para todos los miembros de la familia.</p>
-                    <img src="img/habitaciones/familiar.jpg" alt="Habitación Familiar">
-                    <ul id="informacion_deluxe">
-                        <li><strong>1 persona:</strong> 80€</li>
-                        <li><strong>2 personas:</strong> 100€</li>
-                        <li><strong>3 personas:</strong> 120€</li>
-                        <li><strong>4 personas:</strong> 150€</li>
-                    </ul>
-                </section>
-            </a>
-            <a href="reservar.html">
-                <section>
-                    <h2>Suite Presidencial</h2>
-                    <p>Nuestra suite más lujosa, con decoración exquisita, sala de estar privada y terraza con vistas panorámicas.</p>
-                    <img src="img/habitaciones/suite.jpg" alt="Suite Presidencial">
-                    <ul id="informacion_deluxe">
-                        <li><strong>1 persona:</strong> 200€</li>
-                        <li><strong>2 personas:</strong> 250€</li>
-                        <li><strong>3 personas:</strong> 300€</li>
-                        <li><strong>4 personas:</strong> 350€</li>
-                    </ul>
-                </section>
-            </a> -->
