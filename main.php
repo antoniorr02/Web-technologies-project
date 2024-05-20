@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -453,7 +457,7 @@
 				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="presentacion.html">¿Quién somos?</a></li>
 				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="eventos.html">Eventos</a></li>
 				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="#">Contacto</a></li>
-				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="login.html">Login</a></li>
+				<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="login.php">Login</a></li>
 			</ul>
 
 		</nav>
@@ -500,11 +504,16 @@
 					<p>Número de habitaciones libres: [Insertar número]</p>
 					<p>Capacidad total del hotel: [Insertar número]</p>
 					<p>Número de huéspedes alojados: [Insertar número]</p>
-					<button id="boton"><a href="login.html">Login</a></button>
-					<button id="boton"><a href="formulario_registro.php">Registro</a></button>
+                    <?php
+                        if (!isset($_SESSION['id'])) {
+                            echo '<button id="boton"><a href="login.php">Login</a></button>';
+                            echo '<button id="boton"><a href="formulario_registro.php">Registro</a></button>';
+                        }
+                    ?>
 				</aside>
 			</div>
 		</main>
+
 		<!--=============================================
 		SECCION 4
 		=============================================-->

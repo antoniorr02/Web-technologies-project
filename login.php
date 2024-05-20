@@ -24,10 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
         $_SESSION['id'] = $user_id;
         
         // Redireccionar al usuario a la página de inicio de sesión exitosa
-        header("Location: {$_SERVER['main.html']}");
+        header("Location: main.php");
+        exit();
     } else {
         // Si las credenciales son incorrectas, redireccionar al usuario a la página de inicio de sesión de nuevo
         header("Location: {$_SERVER['PHP_SELF']}");
+        exit();
     }
 }
 ?>
@@ -113,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
 <body>
     <div class="login-container">
         <h2>Iniciar Sesión</h2>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
                 <input type="email" id="email" name="email" required>
