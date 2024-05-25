@@ -260,5 +260,45 @@ function registrar_evento($descripcion, $user_id = null) {
     $stmt->close();
 }
 
+function buscar_habitaciones_adecuadas($huespedes, $fecha_entrada, $fecha_salida, $user_id = null) {
+    global $conn;
+
+    // Iniciar transacción
+    mysqli_autocommit($conn, false);
+
+    try {
+        // Consulta para encontrar habitaciones disponibles que coincidan con los criterios de búsqueda
+        $sql = "SELECT * FROM habitaciones_hotel
+                WHERE capacidad >= ? 
+                AND id NOT IN (
+                    SELECT id_habitacion FROM reservas 
+                    WHERE estado = 'Pendiente' 
+                    AND (fecha_entrada BETWEEN ? AND ? 
+                         OR fecha_salida BETWEEN ? AND ?)
+                )";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('issss', $huespedes, $fecha_entrada, $fecha_salida, $fecha_entrada, $fecha_salida);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $habitaciones = $result->fetch_all(MYSQLI_ASSOC);
+
+        // Registrar el evento
+        $descripcion = "Buscando habitaciones adecuadas para $huespedes personas, del $fecha_entrada al $fecha_salida.";
+        registrar_evento($descripcion, $user_id);
+
+        // Confirmar transacción
+        mysqli_commit($conn);
+
+        return $habitaciones;
+    } catch (Exception $e) {
+        // Si hay algún error, revertir transacción
+        mysqli_rollback($conn);
+        throw $e;
+    } finally {
+        // Restaurar el comportamiento de autocommit
+        mysqli_autocommit($conn, true);
+    }
+}
 
 ?>

@@ -1,38 +1,45 @@
 <?php
     include 'funciones.php';
 
+    // Inicializar un array para almacenar los mensajes de error
+    $errors = array();
+    $confirmMessage = "";
+
     // Verificar si se ha enviado el formulario
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['huespedes'])) {
-        // Inicializar un array para almacenar los mensajes de error
-        $errors = array();
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['huespedes'])) {
+            // Comprobar que se haya rellenado el número de huéspedes
+            if (empty($_POST['huespedes'])) {
+                $errors['huespedes'] = 'Por favor, ingrese el número de huéspedes.';
+            }
 
-        // Comprobar que se haya rellenado el número de huéspedes
-        if (empty($_POST['huespedes'])) {
-            $errors['huespedes'] = 'Por favor, ingrese el número de huéspedes.';
-        }
-
-        // Comprobar que la fecha de entrada sea posterior a la actual
-        $fecha_entrada = $_POST['fecha_entrada'];
-        if (strtotime($fecha_entrada) < strtotime(date('Y-m-d'))) {
-            $errors['fecha_entrada'] = 'La fecha de entrada debe ser posterior a la actual.';
-        }
-
-        // Comprobar que la fecha de salida sea posterior a la de entrada
-        $fecha_salida = $_POST['fecha_salida'];
-        if (strtotime($fecha_salida) <= strtotime($fecha_entrada)) {
-            $errors['fecha_salida'] = 'La fecha de salida debe ser posterior a la fecha de entrada.';
-        }
-
-        if (empty($errors)){
-            $disabled = "disabled";
-
-            $huespedes = $_POST['huespedes'];
+            // Comprobar que la fecha de entrada sea posterior a la actual
             $fecha_entrada = $_POST['fecha_entrada'];
-            $fecha_salida = $_POST['fecha_salida'];
-            $preferencias = $_POST['preferencias'];
+            if (strtotime($fecha_entrada) < strtotime(date('Y-m-d'))) {
+                $errors['fecha_entrada'] = 'La fecha de entrada debe ser posterior a la actual.';
+            }
 
-            // Falta hacer esta función en funciones.php para filtrar las habitaciones
-            $habitaciones = buscar_habitaciones_adecuadas($huespedes, $fecha_entrada, $fecha_salida);
+            // Comprobar que la fecha de salida sea posterior a la de entrada
+            $fecha_salida = $_POST['fecha_salida'];
+            if (strtotime($fecha_salida) <= strtotime($fecha_entrada)) {
+                $errors['fecha_salida'] = 'La fecha de salida debe ser posterior a la fecha de entrada.';
+            }
+
+            // Si no hay errores, buscar habitaciones disponibles
+            if (empty($errors)) {
+                $huespedes = $_POST['huespedes'];
+                $preferencias = $_POST['preferencias'];
+
+                // Buscar habitaciones disponibles
+                $habitaciones = buscar_habitaciones_adecuadas($huespedes, $fecha_entrada, $fecha_salida);
+            }
+        } elseif (isset($_POST['confirmar_reserva'])) {
+            // Lógica para confirmar la reserva
+            $numero_habitacion = $_POST['numero_habitacion'];
+            $confirmMessage = "Reserva confirmada para la habitación $numero_habitacion.";
+        } elseif (isset($_POST['cancelar_reserva'])) {
+            // Lógica para cancelar la reserva
+            $confirmMessage = "Reserva cancelada.";
         }
     }
 ?>
@@ -130,6 +137,48 @@
             color: red;
             font-weight: bold;
         }
+        section {
+            background-image: url("img/fondos/fondo_azul_suave.png");
+            background-size: cover;
+            background-repeat:no-repeat;
+            background-attachment: scroll;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+            transition: opacity 0.3s ease, scale 0.3s ease;
+            color: black;
+        }
+
+        section:hover {
+            opacity: 0.9;
+            scale:calc(1.1);
+        }
+
+        section:hover #informacion_deluxe {
+            font-size: 16px;
+            opacity: 1;
+            transition: font-size 0.3s ease, opacity 0.3s ease; /* Transiciones suaves */
+            margin-top: 10px;
+        }
+
+        #informacion_deluxe {
+            font-size: 0px;
+            opacity: 0;
+            transition: font-size 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease; /* Transiciones suaves */
+            text-align: left;
+        }
+
+        .confirm-form {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .confirm-form input[type="submit"] {
+            width: 45%;
+        }
     </style>
 </head>
 <body>
@@ -172,18 +221,34 @@
                 </div>
             </div>
         </div>
-        <input type="submit" value="Realizar reserva">
+        <input type="submit" value="Buscar reserva">
     </form>
-    <?php if (!empty($habitaciones)): ?>
-        <h2>Seleccione la habitación que desee</h2>
-        <ul>
-            <!--Seguramente tengamos que buscar un formato a esto y unificar para cada vez que se muestre el listado de habitaciones-->
-            <!--Además cuando se pulse debe de comenzar la cuenta atrás de 30 segundos para que el usuario confirme (estado: Pendiente)-->
-            <!--Además al pulsar sobre la habitación saldrá dos botones en la interfaz el de confirmar reserva o cancelarla-->
-            <?php foreach ($habitaciones as $habitacion): ?>
-                <li><?php echo htmlspecialchars($habitacion['numero_habitacion']); ?> - Capacidad: <?php echo htmlspecialchars($habitacion['capacidad']); ?> - Precio por noche: <?php echo htmlspecialchars($habitacion['precio_noche']); ?>€</li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
+    <?php
+        if (!empty($habitaciones)) {
+            echo '<center><h2>Mejores Opciones</h2></center>';
+            // Loop a través de cada fila de resultados
+            foreach($habitaciones as $habitacion) {
+                // Generar el HTML para cada habitación
+                echo '<section>';
+                echo '<h2>' . htmlspecialchars($habitacion['numero_habitacion']) . '</h2>';
+                echo '<p>' . htmlspecialchars($habitacion['descripcion']) . '</p>';
+                echo '<img src="ruta/a/la/imagen.jpg" alt="Habitación">';
+                echo '<ul id="informacion_deluxe">';
+                echo '<li><strong>Capacidad:</strong> ' . htmlspecialchars($habitacion['capacidad']) . '</li>';
+                echo '<li><strong>Precio por noche:</strong> ' . htmlspecialchars($habitacion['precio_noche']) . '€</li>';
+                echo '</ul>';
+                echo '<form method="post" class="confirm-form">';
+                echo '<input type="hidden" name="numero_habitacion" value="' . htmlspecialchars($habitacion['numero_habitacion']) . '">';
+                echo '<input type="submit" name="confirmar_reserva" value="Confirmar">';
+                echo '<input type="submit" name="cancelar_reserva" value="Cancelar">';
+                echo '</form>';
+                echo '</section>';
+            }
+        }
+
+        if (!empty($confirmMessage)) {
+            echo '<p>' . htmlspecialchars($confirmMessage) . '</p>';
+        }
+    ?>
 </body>
 </html>
