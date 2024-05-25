@@ -8,32 +8,41 @@ global $conn;
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
     // Obtener los datos del formulario
     $email = $_POST['email'];
-    $password = luhn($_POST['password']);
+    $password = $_POST['password'];
 
     // Consultar la base de datos para verificar las credenciales
-    $sql = "SELECT id FROM usuarios_hotel WHERE correo = '$email' AND clave_hashed = '$password'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT id, clave_hashed FROM usuarios_hotel WHERE correo = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    // Verificar si se encontró un usuario con las credenciales proporcionadas
+    // Verificar si se encontró un usuario con el correo proporcionado
     if ($result->num_rows > 0) {
-        // Obtener el ID del usuario
+        // Obtener los datos del usuario
         $row = $result->fetch_assoc();
         $user_id = $row['id'];
+        $hashed_password = $row['clave_hashed'];
         
-        // Guardar el ID del usuario en la sesión
-        $_SESSION['id'] = $user_id;
+        // Verificar la contraseña
+        if (password_verify($password, $hashed_password)) {
+            // Guardar el ID del usuario en la sesión
+            $_SESSION['id'] = $user_id;
 
-        registrar_evento("Usuario identificado", $user_id);
-        
-        // Redireccionar al usuario a la página de inicio de sesión exitosa
-        header("Location: main.php");
-        exit();
+            registrar_evento("Usuario identificado", $user_id);
+            
+            // Redireccionar al usuario a la página de inicio de sesión exitosa
+            header("Location: main.php");
+            exit();
+        } else {
+            registrar_evento("Intento de identificación erróneo: contraseña incorrecta");
+        }
     } else {
-        registrar_evento("Intento de identificación erróneo");
-        // Si las credenciales son incorrectas, redireccionar al usuario a la página de inicio de sesión de nuevo
-        header("Location: {$_SERVER['PHP_SELF']}");
-        exit();
+        registrar_evento("Intento de identificación erróneo: usuario no encontrado");
     }
+
+    // Si las credenciales son incorrectas, redireccionar al usuario a la página de inicio de sesión de nuevo
+    header("Location: {$_SERVER['PHP_SELF']}");
+    exit();
 }
 ?>
 
