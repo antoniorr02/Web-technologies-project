@@ -145,6 +145,50 @@ function luhn($tarjeta) {
     return $suma % 10 === 0;
 }
 
+function generarNumeroTarjetaLuhn($numeroBase) {
+    // Eliminar espacios en blanco y caracteres no numéricos
+    $numeroBase = preg_replace('/\D/', '', $numeroBase);
+    
+    // Añadir un dígito cero al final para el cálculo del dígito de control
+    $numeroBase .= '0';
+    
+    // Convertir la cadena en un array de dígitos
+    $digitos = str_split(strrev($numeroBase));
+
+    $suma = 0;
+    $doble = false;
+
+    foreach ($digitos as $indice => $digito) {
+        // Convertir el dígito a entero
+        $digito = intval($digito);
+
+        // Si el dígito está en una posición impar, se duplica
+        if ($doble) {
+            $digito *= 2;
+
+            // Si el resultado de la multiplicación es mayor que 9, se resta 9
+            if ($digito > 9) {
+                $digito -= 9;
+            }
+        }
+
+        // Sumar el dígito a la suma total
+        $suma += $digito;
+
+        // Alternar entre doblar y no doblar en cada iteración
+        $doble = !$doble;
+    }
+
+    // Calcular el dígito de control que hará que la suma sea un múltiplo de 10
+    $digitoControl = (10 - ($suma % 10)) % 10;
+
+    // Reemplazar el dígito de control en la posición correspondiente
+    $numeroValido = substr($numeroBase, 0, -1) . $digitoControl;
+
+    // Devolver el número de tarjeta generado
+    return strrev($numeroValido);
+}
+
 // Función para insertar una habitación
 function insertar_habitacion($numero_habitacion, $capacidad, $precio_noche, $descripcion) {
     global $conn;
