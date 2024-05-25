@@ -21,7 +21,7 @@ function insertar_usuario($nombre, $apellidos, $dni, $tarjeta, $nacionalidad, $f
 function obtener_usuarios() {
     global $conn;
     
-    $sql = "SELECT * FROM usuarios";
+    $sql = "SELECT * FROM usuarios_hotel";
     $result = $conn->query($sql);
     
     $usuarios = array();
