@@ -37,6 +37,11 @@
 <?php
 include 'funciones.php';
 
+function is_image($file) {
+    $datos = getimagesize($file);
+    return $datos ? ((in_array($datos[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_BMP, IMAGETYPE_PNG, IMAGETYPE_BMP))) ? true : false) : false;
+}
+
 // Procesar la subida de imágenes
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['habitacion_id'])) {
     $habitacion_id = $_POST['habitacion_id'];
@@ -45,15 +50,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['habitacion_id'])) {
     foreach ($imagenes['tmp_name'] as $key => $tmp_name) {
         // Verificar si se subió correctamente
         if (is_uploaded_file($tmp_name)) {
-            // Leer el contenido del archivo
-            $imagen_blob = file_get_contents($tmp_name);
-            
-            // Preparar la consulta SQL para insertar la imagen en la base de datos
-            $stmt = $conn->prepare("INSERT INTO fotos_habitacion (habitacion_id, foto) VALUES (?, ?)");
-            
-            // Vincular el parámetro y ejecutar la consulta
-            $stmt->bind_param("ib", $habitacion_id, $imagen_blob);
-            $stmt->execute();
+            if (is_image($tmp_name)) {
+                // Leer el contenido del archivo
+                $imagen_blob = file_get_contents($tmp_name);
+                
+                // Preparar la consulta SQL para insertar la imagen en la base de datos
+                $stmt = $conn->prepare("INSERT INTO fotos_habitacion (habitacion_id, foto) VALUES (?, ?)");
+                
+                // Vincular el parámetro y ejecutar la consulta
+                $null = NULL; // Necesario para pasar un BLOB
+                $stmt->bind_param("ib", $habitacion_id, $null);
+                $stmt->send_long_data(1, $imagen_blob);
+                $stmt->execute();
+            }
         }
     }
 
@@ -87,13 +96,17 @@ $imagenes_habitacion = obtener_imagenes_habitacion($habitacion_id);
 if (!empty($imagenes_habitacion)) {
     echo "<h2>Imágenes existentes:</h2>";
     foreach ($imagenes_habitacion as $imagen) {
-        echo "<div>";
-        echo '<img src="data:image/jpeg;base64,'.base64_encode($imagen['foto']).'"/>';
-        echo "<form method='post' action='" . $_SERVER['PHP_SELF'] . "' style='margin-bottom: 10px; display: flex; justify-content: center;'>";
-        echo "<input type='hidden' name='id' value='" . $imagen['id'] . "'>";
-        echo "<input type='submit' value='Borrar'>";
-        echo "</form>";
-        echo "</div>";
+        if (isset($imagen['foto']) && !empty($imagen['foto'])) {
+            $image_data = base64_encode($imagen['foto']);
+
+            echo "<div>";
+            echo '<img src="data:image/;base64,'.$image_data.'">';
+            echo "<form method='post' action='" . $_SERVER['PHP_SELF'] . "' style='margin-bottom: 10px; display: flex; justify-content: center;'>";
+            echo "<input type='hidden' name='id' value='" . $imagen['id'] . "'>";
+            echo "<input type='submit' value='Borrar'>";
+            echo "</form>";
+            echo "</div>";
+        }
     }
 }
 ?>

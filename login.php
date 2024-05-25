@@ -8,7 +8,7 @@ global $conn;
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
     // Obtener los datos del formulario
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = luhn($_POST['password']);
 
     // Consultar la base de datos para verificar las credenciales
     $sql = "SELECT id FROM usuarios_hotel WHERE correo = '$email' AND clave_hashed = '$password'";

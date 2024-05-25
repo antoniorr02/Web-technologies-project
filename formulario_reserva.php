@@ -179,6 +179,15 @@
         .confirm-form input[type="submit"] {
             width: 45%;
         }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%; /* Hace que la imagen sea responsiva */
+            height: auto; /* Mantiene la proporción de la imagen */
+            border-radius: 10px;
+            max-width: 250px;
+        }
     </style>
 </head>
 <body>
@@ -232,7 +241,16 @@
                 echo '<section>';
                 echo '<h2>' . htmlspecialchars($habitacion['numero_habitacion']) . '</h2>';
                 echo '<p>' . htmlspecialchars($habitacion['descripcion']) . '</p>';
-                echo '<img src="ruta/a/la/imagen.jpg" alt="Habitación">';
+                // Obtener las imágenes de la habitación
+                $imagenes = obtener_imagenes_habitacion($habitacion['id']);
+
+                // Mostrar las imágenes
+                foreach ($imagenes as $imagen) {
+                    $image_data = base64_encode($imagen['foto']);
+                    $image_type = 'jpeg'; // Asume el tipo de imagen. Se recomienda almacenar el tipo en la BD
+
+                    echo '<img src="data:image/'.$image_type.';base64,'.$image_data.'" alt="Habitación">';
+                }
                 echo '<ul id="informacion_deluxe">';
                 echo '<li><strong>Capacidad:</strong> ' . htmlspecialchars($habitacion['capacidad']) . '</li>';
                 echo '<li><strong>Precio por noche:</strong> ' . htmlspecialchars($habitacion['precio_noche']) . '€</li>';

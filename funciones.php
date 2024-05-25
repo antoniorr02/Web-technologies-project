@@ -110,6 +110,40 @@ function obtener_usuario_por_id($id_usuario) {
     return $usuario;
 }
 
+function luhn($tarjeta) {
+    // Eliminar espacios en blanco y caracteres no numéricos
+    $tarjeta = preg_replace('/\D/', '', $tarjeta);
+
+    // Convertir la cadena en un array de dígitos
+    $digitos = str_split(strrev($tarjeta));
+
+    $suma = 0;
+    $doble = false;
+
+    foreach ($digitos as $digito) {
+        // Convertir el dígito a entero
+        $digito = intval($digito);
+
+        // Si el dígito está en una posición impar, se duplica
+        if ($doble) {
+            $digito *= 2;
+
+            // Si el resultado de la multiplicación es mayor que 9, se resta 9
+            if ($digito > 9) {
+                $digito -= 9;
+            }
+        }
+
+        // Sumar el dígito a la suma total
+        $suma += $digito;
+
+        // Alternar entre doblar y no doblar en cada iteración
+        $doble = !$doble;
+    }
+
+    // Si la suma total es un múltiplo de 10, la tarjeta es válida
+    return $suma % 10 === 0;
+}
 
 // Función para insertar una habitación
 function insertar_habitacion($numero_habitacion, $capacidad, $precio_noche, $descripcion) {
