@@ -64,6 +64,7 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
+
         h2 {
             display: inline-block;
             background-color: #26C6DA;
@@ -71,6 +72,15 @@
             padding: 10px 20px;
             margin: 20px 0 -10px 30px;
             border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #opciones {
+            display: block;
+            background-color: #0277BD;
+            color: white;
+            padding: 10px 20px;
+            margin: 0px 0px 0px 0px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
@@ -234,7 +244,7 @@
     </form>
     <?php
         if (!empty($habitaciones)) {
-            echo '<center><h2>Mejores Opciones</h2></center>';
+            echo '<h2 id="opciones">Mejores Opciones</h2>';
             // Loop a través de cada fila de resultados
             foreach($habitaciones as $habitacion) {
                 // Generar el HTML para cada habitación
