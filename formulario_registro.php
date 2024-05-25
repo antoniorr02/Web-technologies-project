@@ -149,6 +149,13 @@
                 $nombre = $_POST['nombre'];
             }
 
+            // Validar los apellidos
+            if (empty($_POST["apellidos"])) {
+                $errors["apellidos"] = "Los apellidos son obligatorio.";
+            } else {
+                $apellidos = $_POST['apellidos'];
+            }
+
             // Validar el DNI
             if (empty($_POST["dni"])) {
                 $errors["dni"] = "El DNI es obligatorio.";
@@ -156,6 +163,14 @@
                 // Verificar si el DNI tiene el formato correcto (8 dígitos seguidos de una letra)
                 if (!preg_match("/^[0-9]{8}[a-zA-Z]$/", $_POST["dni"])) {
                     $errors["dni"] = "El formato del DNI no es válido.";
+                } else {
+                    $numero = substr($_POST['dni'], 0, 8); // Los primeros 8 caracteres son el número
+                    $letra = strtoupper(substr($_POST['dni'], -1)); // El último carácter es la letra
+                    $letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+                    $letra_correcta = $letras[$numero % 23];
+                    if ($letra != $letra_correcta) {
+                        $errors["dni"] = "El DNI no es válido.";
+                    }
                 }
             }
 
@@ -181,6 +196,8 @@
             // Validar la clave
             if (empty($_POST["clave"]) || empty($_POST["clave_repetida"])) {
                 $errors["clave"] = "La clave es obligatoria.";
+            } elseif (strlen($_POST["clave"]) < 5) {
+                $errors["clave"] = "Clave demasiado corta.";
             } elseif ($_POST["clave"] !== $_POST["clave_repetida"]) {
                 $errors["clave"] = "Las claves no coinciden.";
             }
@@ -235,6 +252,9 @@
                 <div class="auxiliar" id="aux3">
                     <label for="apellidos">Apellidos:</label>
                     <input type="text" id="apellidos" name="apellidos" value="<?php echo isset($_POST['apellidos']) ? htmlspecialchars($_POST['apellidos']) : ''; ?>" placeholder="Introduzca sus apellidos" <?php echo isset($disabled) ? $disabled : ''; ?>>
+                    <?php if(isset($errors['apellidos'])): ?>
+                        <span class="error-message"><?php echo $errors['apellidos']; ?></span>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="intermedio" id="intermedio2">
