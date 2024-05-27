@@ -529,7 +529,7 @@
                             echo '<a href="login.php"><button id="boton">Login</button></a>';
                             echo '<a href="formulario_registro.php"><button id="boton">Registro</button></a>';
                         } else {
-                            echo '<button id="boton"><a href="cerrar_sesion.php">Cerrar sesion</a></button>';
+                            echo '<a href="cerrar_sesion.php"><button id="boton">Cerrar sesion</button></a>';
                         }
                     ?>
 				</aside>
