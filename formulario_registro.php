@@ -128,15 +128,6 @@
 <?php
         include 'funciones.php';
 
-        // Verificar si se ha enviado el formulario para borrar un usuario
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['usuario_id'])) {
-            // Obtener el ID del usuario a borrar desde el formulario
-            $usuario_id = $_POST['usuario_id'];
-
-            // Llamar a la función para borrar el usuario
-            borrar_usuario($usuario_id);
-        }
-
         // Verificar si se ha enviado el formulario
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre'])) {
             // Inicializar un array para almacenar los mensajes de error

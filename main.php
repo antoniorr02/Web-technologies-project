@@ -468,7 +468,7 @@
                 <?php
                     if ($usuario) {
                         if ($usuario['tipo_usuario'] == "Cliente") {
-                            echo '<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="#">Mi usuario</a></li>';
+                            echo '<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="datos_usuario.php">Mi usuario</a></li>';
                         } else if ($usuario['tipo_usuario'] == "Recepcionista") {
                             echo '<li class="col-lg-2 col-md-2 col-sm-6 col-xs-12"><a id="boton" href="#">Gestión</a></li>';
                         } else {

@@ -1,3 +1,14 @@
+<?php
+session_start();
+include 'funciones.php';
+
+$user_id = $_SESSION['id'];
+
+$usuario = obtener_usuario_por_id($user_id);
+$reservas_activas = obtener_reservas_activas($user_id);
+$historial_reservas = obtener_historial_reservas($user_id);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -35,9 +46,9 @@
         .reservas table {
             width: 100%;
             border-collapse: collapse;
-            border-radius: 10px; /* Bordes redondeados para la tabla */
-            overflow: hidden; /* Ocultar los bordes redondeados de las celdas fuera de la tabla */
-            border: 1px solid #ddd; /* Agregamos borde a la tabla */
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
         }
         .reservas th, .reservas td {
             padding: 8px;
@@ -55,14 +66,17 @@
             background-color: #007bff;
             color: #fff;
             border: none;
-            border-radius: 5px; /* Bordes redondeados */
+            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s ease-in-out; /* Transición suave */
+            transition: all 0.3s ease-in-out;
         }
         .btn-editar:hover {
-            transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+            transform: scale(1.1);
             background-color: #0056b3;
-            border-radius: 10px; /* Cambia el radio de los bordes al pasar el ratón */
+            border-radius: 10px;
+        }
+        a {
+            text-decoration: none;
         }
     </style>
 </head>
@@ -71,21 +85,21 @@
         <h1>Perfil del Cliente</h1>
         <div class="info">
             <label for="nombre">Nombre:</label>
-            <span id="nombre">Juan</span>
+            <span id="nombre"><?php echo htmlspecialchars($usuario['nombre']); ?></span>
             <br>
             <label for="apellido">Apellido:</label>
-            <span id="apellido">Pérez</span>
+            <span id="apellido"><?php echo htmlspecialchars($usuario['apellidos']); ?></span>
             <br>
             <label for="dni">DNI:</label>
-            <span id="dni">12345678</span>
+            <span id="dni"><?php echo htmlspecialchars($usuario['dni']); ?></span>
             <br>
             <label for="email">Email:</label>
-            <span id="email">juan@example.com</span>
+            <span id="email"><?php echo htmlspecialchars($usuario['correo']); ?></span>
             <br>
             <label for="tarjeta">Tarjeta de Crédito:</label>
-            <span id="tarjeta">**** **** **** 1234</span>
+            <span id="tarjeta"><?php echo '**** **** **** ' . substr($usuario['tarjeta_credito'], -4); ?></span>
         </div>
-        <button class="btn-editar">Editar Datos</button>
+        <a href="editar_usuario.php"><button class="btn-editar">Editar Datos</button></a>
         <div class="reservas">
             <h2>Reservas Activas</h2>
             <table>
@@ -97,16 +111,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($reservas_activas as $reserva) { ?>
                     <tr>
-                        <td>01/04/2024</td>
-                        <td>05/04/2024</td>
-                        <td>101</td>
+                        <td><?php echo htmlspecialchars($reserva['fecha_entrada']); ?></td>
+                        <td><?php echo htmlspecialchars($reserva['fecha_salida']); ?></td>
+                        <td><?php echo htmlspecialchars($reserva['id_habitacion']); ?></td>
                     </tr>
-                    <tr>
-                        <td>15/04/2024</td>
-                        <td>20/04/2024</td>
-                        <td>201</td>
-                    </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
@@ -121,16 +132,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($historial_reservas as $reserva) { ?>
                     <tr>
-                        <td>01/03/2024</td>
-                        <td>05/03/2024</td>
-                        <td>102</td>
+                        <td><?php echo htmlspecialchars($reserva['fecha_entrada']); ?></td>
+                        <td><?php echo htmlspecialchars($reserva['fecha_salida']); ?></td>
+                        <td><?php echo htmlspecialchars($reserva['id_habitacion']); ?></td>
                     </tr>
-                    <tr>
-                        <td>15/03/2024</td>
-                        <td>20/03/2024</td>
-                        <td>202</td>
-                    </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

@@ -68,17 +68,17 @@ function borrar_usuario($id) {
 }
 
 // Función para modificar un usuario
-function modificar_usuario($id, $nombre, $apellidos, $tarjeta, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $clave, $datos, $tipo_usuario) {
+function modificar_usuario($id, $tarjeta, $correo, $clave) {
     global $conn;
     
     // Hash de la contraseña
     $hashed_clave = password_hash($clave, PASSWORD_DEFAULT);
     
     // Preparar la declaración
-    $stmt = $conn->prepare("UPDATE usuarios_hotel SET nombre = ?, apellidos = ?, tarjeta = ?, dni = ?, nacionalidad = ?, fecha_nacimiento = ?, sexo = ?, correo = ?, clave = ?, datos = ?, tipo_usuario WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE usuarios_hotel SET tarjeta_credito = ?, correo = ?, clave_hashed = ? WHERE id = ?");
     
     // Vincular parámetros
-    $stmt->bind_param("ssssssssssi", $nombre, $apellidos, $tarjeta, $dni, $nacionalidad, $fecha_nacimiento, $sexo, $correo, $hashed_clave, $datos, $tipo_usuario, $id);
+    $stmt->bind_param("sssi", $tarjeta, $correo, $hashed_clave, $id);
 
     $stmt->execute();
 }
@@ -425,8 +425,36 @@ function obtenerNumeroHuespedesAlojados() {
             $totalHuespedes += $row['capacidad'];
         }
     }
-    
+
     return $totalHuespedes;
+}
+
+// Función para obtener las reservas activas
+function obtener_reservas_activas($id_cliente) {
+    global $conn;
+    $fecha_actual = date('Y-m-d');
+    $sql = "SELECT * FROM reservas WHERE id_cliente = ? AND fecha_entrada >= ? AND estado = 'Confirmada'";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('is', $id_cliente, $fecha_actual);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $reservas = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    return $reservas;
+}
+
+// Función para obtener el historial de reservas
+function obtener_historial_reservas($id_cliente) {
+    global $conn;
+    $fecha_actual = date('Y-m-d');
+    $sql = "SELECT * FROM reservas WHERE id_cliente = ? AND fecha_entrada < ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('is', $id_cliente, $fecha_actual);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $historial = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    return $historial;
 }
 
 ?>
