@@ -268,8 +268,8 @@
         }
 
         #info {
-            display: flex;
-            justify-content: center;
+            display: block;
+            text-align: center;
             background-color: yellow;
         }
 
@@ -574,6 +574,12 @@
 		</footer>
 
 	</div>
-
+    <div id="info">
+        <p>José Antonio Carmona Molina - Ingeniería Informática + ADE</p>
+        <p>Antonio Rodríguez Rodríguez - Ingeniería Informática + ADE</p>
+        <a href="#">Documentacion</a>
+        <br>
+        <a href="#">Restauración de la BBDD</a>
+    </div>
 </body>
 </html>
