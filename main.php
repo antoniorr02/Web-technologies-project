@@ -526,8 +526,8 @@
 					<p>Número de huéspedes alojados: <?php echo(obtenerNumeroHuespedesAlojados());?></p>
                     <?php
                         if (!$usuario) {
-                            echo '<button id="boton"><a href="login.php">Login</a></button>';
-                            echo '<button id="boton"><a href="formulario_registro.php">Registro</a></button>';
+                            echo '<a href="login.php"><button id="boton">Login</button></a>';
+                            echo '<a href="formulario_registro.php"><button id="boton">Registro</button></a>';
                         } else {
                             echo '<button id="boton"><a href="cerrar_sesion.php">Cerrar sesion</a></button>';
                         }
