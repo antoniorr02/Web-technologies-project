@@ -335,4 +335,98 @@ function buscar_habitaciones_adecuadas($huespedes, $fecha_entrada, $fecha_salida
     }
 }
 
+// FUNCIONES PARA ZONA LATERAL
+function numero_habitaciones() {
+    global $conn;
+    $sql = "SELECT COUNT(*) AS total FROM habitaciones_hotel";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $total_habitaciones = $row["total"];
+    } else {
+        $total_habitaciones = 0;
+    }
+    return $total_habitaciones;
+}
+
+function obtenerNumeroHabitacionesLibres() {
+    global $conn;
+
+    // Fecha actual
+    $fechaActual = date('Y-m-d');
+
+    // Consulta SQL para contar todas las habitaciones
+    $sqlTotalHabitaciones = "SELECT COUNT(*) AS total FROM habitaciones_hotel";
+    $resultTotal = $conn->query($sqlTotalHabitaciones);
+
+    // Consulta SQL para contar las habitaciones reservadas actualmente
+    $sqlHabitacionesOcupadas = "
+        SELECT COUNT(DISTINCT id_habitacion) AS ocupadas
+        FROM reservas
+        WHERE fecha_entrada <= '$fechaActual' AND fecha_salida >= '$fechaActual'
+        AND estado = 'Confirmada'
+    ";
+    $resultOcupadas = $conn->query($sqlHabitacionesOcupadas);
+
+    if ($resultTotal->num_rows > 0 && $resultOcupadas->num_rows > 0) {
+        $rowTotal = $resultTotal->fetch_assoc();
+        $rowOcupadas = $resultOcupadas->fetch_assoc();
+
+        $totalHabitaciones = $rowTotal["total"];
+        $habitacionesOcupadas = $rowOcupadas["ocupadas"];
+
+        // Calcular el número de habitaciones libres
+        $habitacionesLibres = $totalHabitaciones - $habitacionesOcupadas;
+    } else {
+        $habitacionesLibres = numero_habitaciones();
+    }
+
+    // Devolver el número de habitaciones libres
+    return $habitacionesLibres;
+}
+
+function capacidad_total() {
+    global $conn;
+    $sql = "SELECT * FROM habitaciones_hotel";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $capacidad = 0;
+        while($row = $result->fetch_assoc()) {
+            $capacidad += $row['capacidad'];
+        }
+    } else {
+        $capacidad = 0;
+    }
+    return $capacidad;
+}
+
+function obtenerNumeroHuespedesAlojados() {
+    global $conn;
+
+    // Fecha actual
+    $fechaActual = date('Y-m-d');
+
+    // Consulta SQL para obtener las habitaciones ocupadas actualmente
+    $sqlHabitacionesOcupadas = "
+        SELECT h.capacidad
+        FROM reservas r
+        JOIN habitaciones_hotel h ON r.id_habitacion = h.id
+        WHERE r.fecha_entrada <= '$fechaActual' AND r.fecha_salida >= '$fechaActual'
+        AND r.estado = 'Confirmada'
+    ";
+    $resultOcupadas = $conn->query($sqlHabitacionesOcupadas);
+
+    $totalHuespedes = 0;
+
+    if ($resultOcupadas) {
+        while ($row = $resultOcupadas->fetch_assoc()) {
+            $totalHuespedes += $row['capacidad'];
+        }
+    }
+    
+    return $totalHuespedes;
+}
+
 ?>

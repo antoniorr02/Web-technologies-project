@@ -520,10 +520,10 @@
 				<aside class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<!-- Información secundaria aquí -->
 					<h2>Información secundaria</h2>
-					<p>Número total de habitaciones: [Insertar número]</p>
-					<p>Número de habitaciones libres: [Insertar número]</p>
-					<p>Capacidad total del hotel: [Insertar número]</p>
-					<p>Número de huéspedes alojados: [Insertar número]</p>
+					<p>Número total de habitaciones: <?php echo(numero_habitaciones());?></p>
+					<p>Número de habitaciones libres: <?php echo(obtenerNumeroHabitacionesLibres());?></p>
+					<p>Capacidad total del hotel: <?php echo(capacidad_total());?></p>
+					<p>Número de huéspedes alojados: <?php echo(obtenerNumeroHuespedesAlojados());?></p>
                     <?php
                         if (!$usuario) {
                             echo '<button id="boton"><a href="login.php">Login</a></button>';
